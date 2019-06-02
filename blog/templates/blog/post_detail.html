@@ -1,13 +1,23 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-    <div class="post">
-        {% if post.published_at %}
-            <div class="date">
-                {{ post.published_at }}
-            </div>
-        {% endif %}
-        <h2>{{ post.title }}</h2>
-        <p>{{ post.text|linebreaksbr }}</p>
+<div class="post">
+    {% if post.published_at %}
+    <div class="date">
+        Published at: {{ post.published_at }}
     </div>
+    {% else %}
+    {% if user.is_authenticated %}
+    <a class="btn btn-default" href="{% url 'blog:post_publish' pk=post.pk %}">Publish</a>
+    {% endif %}
+    {% endif %}
+    {% if user.is_authenticated %}
+    <a class="btn btn-default" href="{% url 'blog:post_update' pk=post.pk %}"><span
+            class="glyphicon glyphicon-edit"></span></a>
+    <a class="btn btn-default" href="{% url 'blog:post_delete' pk=post.pk %}"><span
+            class="glyphicon glyphicon-remove"></span></a>
+    {% endif %}
+    <h2>{{ post.title }}</h2>
+    <p>{{ post.text|linebreaksbr }}</p>
+</div>
 {% endblock %}
