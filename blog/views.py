@@ -26,7 +26,7 @@ class PostDetailView(generic.DetailView):
     model = Post
 
 
-class PostCreate(LoginRequiredMixin,generic.CreateView):
+class PostCreate(LoginRequiredMixin, generic.CreateView):
     model = Post
     fields = ['title', 'text']
 
@@ -35,7 +35,7 @@ class PostCreate(LoginRequiredMixin,generic.CreateView):
         return super().form_valid(form)
 
 
-class PostUpdate(LoginRequiredMixin,generic.UpdateView):
+class PostUpdate(LoginRequiredMixin, generic.UpdateView):
     model = Post
     fields = ['title', 'text']
 
@@ -44,6 +44,6 @@ class PostUpdate(LoginRequiredMixin,generic.UpdateView):
         return super().form_valid(form)
 
 
-class PostDelete(LoginRequiredMixin,generic.DeleteView):
+class PostDelete(LoginRequiredMixin, generic.DeleteView):
     model = Post
     success_url = reverse_lazy('blog:post_list')
