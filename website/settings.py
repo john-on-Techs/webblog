@@ -24,7 +24,7 @@ SECRET_KEY = 'tdq1zb8wvs0y(*_@7773!f0ootboip)*lq2oly2*=3z6y^006^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ['oengajohn.pythonanywhere.com']
 ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
 
 # Application definition
@@ -135,6 +135,12 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 LOGIN_REDIRECT_URL = '/'
 
+<<<<<<< Updated upstream
 
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+=======
+MEDIA_URL = '/media/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+>>>>>>> Stashed changes
