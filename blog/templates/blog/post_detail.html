@@ -12,7 +12,7 @@
             <div class="col-lg-8 col-md-10 mx-auto">
                 <div class="post-heading">
                     <h1>{{post.title}}</h1>
-                    <h2 class="subheading"> {{ post.text|safe|truncatechars:60}}</h2>
+                    <!--<h2 class="subheading"> {{ post.text|safe|truncatechars:60}}</h2>-->
                     <span class="meta">Posted by
               <a href="#">{{post.author.get_username}}</a>
               on {{post.published_at}}</span>
@@ -61,9 +61,9 @@
                 </a>
                 <br>
                 {% endif %}
-                {% autoescape on %}
-                    {{ post.text|safe|linebreaksbr}}
-                {% endautoescape %}
+
+                    {{ post.text|safe}}
+
 
             </div>
         </div>
