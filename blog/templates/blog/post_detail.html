@@ -61,7 +61,10 @@
                 </a>
                 <br>
                 {% endif %}
-                {{ post.text|safe|linebreaksbr}}
+                {% autoescape on %}
+                    {{ post.text|safe|linebreaksbr}}
+                {% endautoescape %}
+
             </div>
         </div>
     </div>
@@ -148,6 +151,21 @@
         plugins:'code image imagetools textcolor save link image media preview codesample contextmenu table code lists fullscreen  insertdatetime  nonbreaking directionality searchreplace wordcount visualblocks visualchars code fullscreen autolink lists  charmap print hr anchor pagebreak',
         toolbar1: 'fullscreen preview bold italic underline | fontselect,fontsizeselect  | forecolor backcolor | alignleft alignright |aligncenter alignjustify | indent outdent | bullist numlist table | link image media | codesample |',
         toolbar2:'visualblocks visualchars |charmap hr pagebreak nonbreaking anchor |  code |',
+        codesample_languages: [
+		{text: 'HTML/XML', value: 'markup'},
+		{text: 'JavaScript', value: 'javascript'},
+		{text: 'CSS', value: 'css'},
+		{text: 'PHP', value: 'php'},
+		{text: 'Ruby', value: 'ruby'},
+		{text: 'Python', value: 'python'},
+		{text: 'Java', value: 'java'},
+		{text: 'C', value: 'c'},
+		{text: 'C#', value: 'csharp'},
+		{text: 'C++', value: 'cpp'}
+	],
+	 force_br_newlines : true,
+  force_p_newlines : false,
+  forced_root_block : '' // Needed for 3.x,
         contextmenu: 'formats | link image',
 
         setup: function (editor) {
