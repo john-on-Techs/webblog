@@ -23,7 +23,7 @@ def contact(request):
         message = '{name} {comment_message}'.format(name=name, comment_message=comment)
         emailFrom = form.cleaned_data['email']
         emailTo = [settings.EMAIL_HOST_USER]
-        send_mail(subject, message, emailFrom, emailTo, fail_silently=True)
+        send_mail(subject, message, emailFrom, emailTo)
         title = 'Well {name}!.'.format(name=name)
         confirm_message = 'Thank You for the Message.We will get right back to you.'
         form = None
