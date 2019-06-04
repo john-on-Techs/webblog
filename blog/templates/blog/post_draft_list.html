@@ -1,10 +1,55 @@
-{% extends "blog/base.html" %}
+{% extends "profiles/base.html" %}
+{% load static %}
+{% block header %}
+
+<!-- Page Header -->
+<header class="masthead" style="background-image: url({% static 'profiles/images/post-bg.jpg' %})">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="site-heading">
+                    <h1> Draft Posts</h1>
+                    <span class="subheading">Not Yet Published   </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock header %}
 {% block content %}
-{% for post in posts %}
-<div class="post">
-    <p class="date">created: {{ post.created_at|date:"d-m-Y" }}</p>
-    <h1><a href="{{post.get_absolute_url}}">{{ post.title }}</a></h1>
-    <p>{{ post.text|truncatechars:200 }}</p>
+{% if user.is_authenticated %}
+<div class="row justify-content-center">
+    <div class="col-lg-5 col-lg-offset-3 mx-auto">
+        <a href="{% url 'blog:post-create' %}" class="top-menu">
+             <span class="fa-stack fa-lg">
+                 <i class="fas fa-circle fa-stack-2x "></i>
+                 <i class="fa fa-plus fa-stack-1x fa-inverse " aria-hidden="true"></i>
+             </span>Add new
+        </a>
+    </div>
 </div>
+{% endif %}
+
+{% for post in posts %}
+<div class="post-preview">
+    <a href="{{ post.get_absolute_url }}">
+        <h2 class="post-title">
+            {{ post.title }}
+        </h2>
+        <h3 class="post-subtitle">
+            {{ post.text|safe|linebreaksbr }}
+        </h3>
+    </a>
+    <p class="post-meta">Created by
+        <a href="#">{{post.author.get_username}}</a>
+        on {{post.created_at}}</p>
+
+</div>
+<hr>
+{% empty %}
+    <p>No draft posts yet.</p>
 {% endfor %}
+
+
 {% endblock %}

@@ -16,11 +16,21 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth.views import login, logout
+from filebrowser.sites import site
+from django.conf import settings
+from django.conf.urls.static import static
 
 admin.autodiscover()
 urlpatterns = [
-    path('admin/', admin.site.urls),
+
     path('accounts/login/', login, name='login'),
     path('accounts/logout/', logout, {'next_page': '/'}, name='logout'),
-    path('', include('blog.urls')),
+    path('tinymce/', include('tinymce.urls')),
+    path('admin/filebrowser/', site.urls),
+    path('admin/', admin.site.urls),
+    path('blog/', include('blog.urls')),
+    path('', include('profiles.urls')),
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

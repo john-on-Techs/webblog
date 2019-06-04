@@ -1,12 +1,46 @@
-{% extends "blog/base.html" %}
+{% extends "profiles/base.html" %}
+
 {% load crispy_forms_tags %}
+{% load static %}
+
 {% block content %}
+
 <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-        <form method="post">{% csrf_token %}
-            {{ form|crispy }}
-            <input class="btn btn-default" type="submit" value="Save"/>
-        </form>
+    <div class="col-md-10 col-md-offset-3 mx-auto">
+        <h3>{{title}}</h3>
+        {{ form.media }}
+    <div class="row form-error">
+        <div class="column" id="content">
+            <form  method="post" action='' enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <input class="btn btn-primary" type="submit" value="Save">
+            </form>
+        </div>
+    </div>
     </div>
 </div>
 {% endblock content %}
+{% block js %}
+
+<script type="text/javascript">
+    tinymce.init({
+        height: 360,
+        width: 600,
+        theme: 'modern',
+
+        custom_undo_redo_levels: 20,
+        selector: 'textarea',
+        plugins:'code image imagetools textcolor save link image media preview codesample contextmenu table code lists fullscreen  insertdatetime  nonbreaking directionality searchreplace wordcount visualblocks visualchars code fullscreen autolink lists  charmap print hr anchor pagebreak',
+        toolbar1: 'fullscreen preview bold italic underline | fontselect,fontsizeselect  | forecolor backcolor | alignleft alignright |aligncenter alignjustify | indent outdent | bullist numlist table | link image media | codesample |',
+        toolbar2:'visualblocks visualchars |charmap hr pagebreak nonbreaking anchor |  code |',
+        contextmenu: 'formats | link image',
+
+        setup: function (editor) {
+            editor.on('change', function (e) {
+                editor.save();
+            });
+        }
+    });
+</script>
+{% endblock js %}

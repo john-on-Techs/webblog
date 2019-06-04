@@ -1,4 +1,6 @@
-{% extends "blog/base.html" %}
+{% extends "profiles/base.html" %}
+
+
 {% load crispy_forms_tags %}
 {% block content %}
 {% if form.errors %}
@@ -10,7 +12,7 @@
             {% csrf_token %}
             {{form|crispy}}
 
-            <input class="btn btn-default" type="submit" value="login"/>
+            <input class="btn btn-primary" type="submit" value="login"/>
             <input  type="hidden" name="next" value="{{ next }}"/>
         </form>
     </div>

@@ -1,4 +1,4 @@
-{% extends "blog/base.html" %}
+{% extends "profiles/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
 <div class="row">
@@ -11,3 +11,16 @@
     </div>
 </div>
 {% endblock content %}
+{% block js %}
+
+<script type="text/javascript">
+    tinymce.init({
+        selector: 'textarea',
+        setup: function (editor) {
+            editor.on('change', function (e) {
+                editor.save();
+            });
+        }
+    });
+</script>
+{% endblock js %}
