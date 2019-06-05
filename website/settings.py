@@ -25,7 +25,7 @@ SECRET_KEY = 'tdq1zb8wvs0y(*_@7773!f0ootboip)*lq2oly2*=3z6y^006^'
 DEBUG = True
 
 # ALLOWED_HOSTS = ['oengajohn.pythonanywhere.com']
-ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com','localhost']
+ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com', 'localhost']
 
 # Application definition
 
@@ -36,6 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
     # Provider apps
     'crispy_forms',
     'tinymce',
@@ -145,7 +147,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 LOGIN_REDIRECT_URL = '/'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 TINYMCE_DEFAULT_CONFIG = {
-    'height': 360,
+    'height': 200,
     'width': 900,
     'cleanup_on_startup': True,
     'custom_undo_redo_levels': 20,
@@ -171,4 +173,5 @@ TINYMCE_DEFAULT_CONFIG = {
     'contextmenu': 'formats | link image',
     'menubar': True,
     'statusbar': True,
-    }
+}
+SITE_ID = 1

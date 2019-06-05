@@ -50,7 +50,7 @@
     <p class="post-meta">Posted by
         <a href="#">{{post.author.get_username}}</a>
         on {{post.published_at}}</p>
-    <a href="{% url 'blog:post_detail' pk=post.pk %}">Comments: {{ post.approved_comments.count }}</a>
+    <a href="{% url 'blog:post_detail' post.slug  %}">Comments: {{ post.approved_comments.count }}</a>
 </div>
 <hr>
 {% empty %}

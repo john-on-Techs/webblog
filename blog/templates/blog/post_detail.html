@@ -35,7 +35,7 @@
 
                 {% else %}
                 {% if user.is_authenticated %}
-                <a  href="{% url 'blog:post_publish' pk=post.pk %}">
+                <a  href="{% url 'blog:post_publish' post.pk %}">
                     <span class="fa-stack fa-lg">
                         <i class="fas fa-circle fa-stack-2x"></i>
                         <i class="fa fa-upload fa-stack-1x fa-inverse" aria-hidden="true"></i>
@@ -45,7 +45,7 @@
                 {% endif %}
                 {% endif %}
                 {% if user.is_authenticated %}
-                <a href="{% url 'blog:post_update' pk=post.pk %}">
+                <a href="{% url 'blog:post_update' pk=post.pk   %}">
                     <span class="fa-stack fa-lg">
                         <i class="fas fa-circle fa-stack-2x"></i>
                         <i class="fa fa-edit fa-stack-1x fa-inverse" aria-hidden="true"></i>
