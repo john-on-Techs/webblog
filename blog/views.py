@@ -3,20 +3,9 @@ from django.urls import reverse_lazy
 from django.utils import timezone
 from django.views import generic
 from .forms import CommentForm
-from .models import Post, Comment
+from .models import Post, Comment, Tag
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
-
-
-# Create your views here.
-# def post_list(request):
-#     posts = Post.objects.filter(published_at__lte=timezone.now()).order_by('published_at')
-#     return render(request, 'blog/post_list.html', {'posts': posts})
-#
-#
-# def post_detail(request, pk):
-#     post = get_object_or_404(Post, id=pk)
-#     return render(request, 'blog/post_detail.html', {'post': post})
 
 
 @login_required
@@ -92,7 +81,7 @@ class PostDetailView(generic.DetailView):
 
 class PostCreate(LoginRequiredMixin, generic.CreateView):
     model = Post
-    fields = ['title', 'slug', 'text']
+    fields = ['title', 'tags', 'category', 'text']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -104,9 +93,14 @@ class PostCreate(LoginRequiredMixin, generic.CreateView):
         return context
 
 
+class TagCreate(generic.CreateView):
+    model = Tag
+    fields = ['name', 'posts']
+
+
 class PostUpdate(LoginRequiredMixin, generic.UpdateView):
     model = Post
-    fields = ['title', 'slug', 'text']
+    fields = ['title', 'tags', 'category', 'text']
     query_pk_and_slug = True
 
     def form_valid(self, form):

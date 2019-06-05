@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     'tinymce',
     'filebrowser',
+    'django_select2',
+    'easy_select2',
 
     # Custom apps
     'blog',

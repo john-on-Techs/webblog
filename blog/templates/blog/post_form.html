@@ -2,28 +2,36 @@
 
 {% load crispy_forms_tags %}
 {% load static %}
-
+{% block css %}
+{{ form.media.css }}
+<link href="{% static 'profiles/css/select2.min.css' %} " rel="stylesheet">
+{% endblock css %}
 {% block content %}
 
 <div class="row">
     <div class="col-md-10 col-md-offset-3 mx-auto">
         <h3>{{title}}</h3>
         {{ form.media }}
-    <div class="row form-error">
-        <div class="column" id="content">
-            <form  method="post" action='' enctype="multipart/form-data">
-                {% csrf_token %}
-                {{ form|crispy }}
-                <input class="btn btn-primary" type="submit" value="Save">
-            </form>
+        <div class="row form-error">
+            <div class="column" id="content">
+                <form method="post" action='' enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <input class="btn btn-primary" type="submit" value="Save">
+                </form>
+            </div>
         </div>
-    </div>
     </div>
 </div>
 {% endblock content %}
 {% block js %}
-
+{{ form.media.js }}
+<script src="{% static 'profiles/js/select2.min.js' %}"></script>
 <script type="text/javascript">
+    $('.selectmultiple').select2();
+</script>
+<script type="text/javascript">
+
     tinymce.init({
         height: 360,
         width: 600,
@@ -42,5 +50,6 @@
             });
         }
     });
+
 </script>
 {% endblock js %}

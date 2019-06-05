@@ -35,7 +35,7 @@
 
                 {% else %}
                 {% if user.is_authenticated %}
-                <a  href="{% url 'blog:post_publish' post.pk %}">
+                <a href="{% url 'blog:post_publish' post.pk %}">
                     <span class="fa-stack fa-lg">
                         <i class="fas fa-circle fa-stack-2x"></i>
                         <i class="fa fa-upload fa-stack-1x fa-inverse" aria-hidden="true"></i>
@@ -62,7 +62,7 @@
                 <br>
                 {% endif %}
 
-                    {{ post.text|safe}}
+                {{ post.text|safe}}
 
 
             </div>
@@ -70,7 +70,7 @@
     </div>
 </article>
 <hr>
- {% if post.published_at %}
+{% if post.published_at %}
 <div class="container">
     <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
@@ -107,7 +107,7 @@
                 <p>{{ comment.text|safe|linebreaks}}</p>
             </div>
             {% else %}
-              <p>No comments approved yet or this post :(</p>
+            <p>No comments approved yet or this post :(</p>
             {% endif %}
             {% empty %}
             <p>No comments here yet :(</p>
@@ -115,7 +115,7 @@
         </div>
     </div>
 </div>
-   {% endif %}
+{% endif %}
 
 <!--<div class="post">-->
 <!--{% if post.published_at %}-->
@@ -140,39 +140,13 @@
 
 {% endblock content%}
 {% block js %}
-<script type="text/javascript">
-    tinymce.init({
-        height: 360,
-        width: 600,
-        theme: 'modern',
+<script>
+        tinymce.init({ selector:'textarea',
+        	plugins:'link code codesample image imagetools wordcount lists  preview table autolink visualblocks visualchars textcolor save link image media',
+        	toolbar1:' preview bold italic underline | fontselect,fontsizeselect  | forecolor backcolor | alignleft alignright |aligncenter alignjustify | indent outdent | bullist numlist table | link image media | codesample |',
+            menubar:false
 
-        custom_undo_redo_levels: 20,
-        selector: 'textarea',
-        plugins:'code image imagetools textcolor save link image media preview codesample contextmenu table code lists fullscreen  insertdatetime  nonbreaking directionality searchreplace wordcount visualblocks visualchars code fullscreen autolink lists  charmap print hr anchor pagebreak',
-        toolbar1: 'fullscreen preview bold italic underline | fontselect,fontsizeselect  | forecolor backcolor | alignleft alignright |aligncenter alignjustify | indent outdent | bullist numlist table | link image media | codesample |',
-        toolbar2:'visualblocks visualchars |charmap hr pagebreak nonbreaking anchor |  code |',
-        codesample_languages: [
-		{text: 'HTML/XML', value: 'markup'},
-		{text: 'JavaScript', value: 'javascript'},
-		{text: 'CSS', value: 'css'},
-		{text: 'PHP', value: 'php'},
-		{text: 'Ruby', value: 'ruby'},
-		{text: 'Python', value: 'python'},
-		{text: 'Java', value: 'java'},
-		{text: 'C', value: 'c'},
-		{text: 'C#', value: 'csharp'},
-		{text: 'C++', value: 'cpp'}
-	],
-	 force_br_newlines : true,
-  force_p_newlines : false,
-  forced_root_block : '' // Needed for 3.x,
-        contextmenu: 'formats | link image',
 
-        setup: function (editor) {
-            editor.on('change', function (e) {
-                editor.save();
-            });
-        }
-    });
+         });
 </script>
 {% endblock js %}

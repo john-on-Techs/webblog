@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include,re_path
+from django.urls import path, include, re_path
 from django.contrib.auth.views import login, logout
 from filebrowser.sites import site
 from django.conf import settings
@@ -23,8 +23,8 @@ from django.contrib.sitemaps.views import sitemap
 from blog.sitemaps import PostSitemap
 
 admin.autodiscover()
-sitemaps ={
-    'posts':PostSitemap
+sitemaps = {
+    'posts': PostSitemap
 }
 urlpatterns = [
 
@@ -33,8 +33,9 @@ urlpatterns = [
     path('tinymce/', include('tinymce.urls')),
     path('admin/filebrowser/', site.urls),
     path('admin/', admin.site.urls),
+    path('select2/', include('django_select2.urls')),
     path('blog/', include('blog.urls')),
-    re_path(r'^sitemap\.xml$',sitemap,{'sitemaps':sitemaps},name='django.contrib.sitemaps.views.sitemap'),
+    re_path(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     path('', include('profiles.urls')),
 ]
 if settings.DEBUG:
