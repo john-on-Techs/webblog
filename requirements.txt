@@ -2,9 +2,14 @@ certifi==2019.3.9
 chardet==3.0.4
 defusedxml==0.6.0
 Django==2.0.13
+django-admin-select2==1.0.1
 django-allauth==0.39.1
+django-appconf==1.0.3
 django-crispy-forms==1.7.2
+django-easy-select2==1.5.5
 django-filebrowser-no-grappelli==3.7.8
+django-select2==7.0.3
+django-taggit==0.17.1
 django-tinymce==2.8.0
 django-tinymce4-lite==1.7.5
 djangorestframework==3.9.4
@@ -17,6 +22,7 @@ python3-openid==3.1.0
 pytz==2019.1
 requests==2.22.0
 requests-oauthlib==1.2.0
+six==1.12.0
 stripe==2.29.3
 toml==0.9.6
 urllib3==1.25.3
