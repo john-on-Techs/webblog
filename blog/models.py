@@ -50,10 +50,11 @@ class Post(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=150, unique=True, db_index=True)
-    tags = models.ManyToManyField(Tag, related_name='posts',blank=True)
+    tags = models.ManyToManyField(Tag, related_name='posts', blank=True)
     text = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
-    published_at = models.DateTimeField(null=True, blank=True)
+    updated_on = models.DateTimeField(auto_now=True)
+    published_at = models.DateTimeField( null=True, blank=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
     # The default Manager
     objects = models.Manager()
@@ -74,6 +75,7 @@ class Post(models.Model):
 
     def publish(self):
         self.published_at = timezone.now()
+        self.status = 'published'
         self.save()
 
     def __str__(self):

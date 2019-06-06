@@ -1,4 +1,4 @@
-{% extends 'profiles/base.html' %}
+{% extends 'blog/base.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
 {% block header %}
@@ -23,120 +23,106 @@
 </header>
 {% endblock header %}
 {% block content %}
-<!-- Post Content -->
-<article>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-9 col-md-11 mx-auto">
-                <h1>{{post.title}}</h1>
+<div class="row">
+    <div class="col-md-9 card mb-4  mt-4 left  top">
+        <div class="card-body">
+            <h1>{% block title %} {{ post.title }} {% endblock title %}</h1>
+            <p class=" text-muted">{{ post.author }} |
                 {% if post.published_at %}
-
-                Published at: {{ post.published_at }}
-
+                Published On {{ post.published_at }}
                 {% else %}
-                {% if user.is_authenticated %}
-                <a href="{% url 'blog:post_publish' post.pk %}">
-                    <span class="fa-stack fa-lg">
-                        <i class="fas fa-circle fa-stack-2x"></i>
-                        <i class="fa fa-upload fa-stack-1x fa-inverse" aria-hidden="true"></i>
-                    </span>
-                    Publish
-                </a>
+                {{ post.created_at }}
                 {% endif %}
-                {% endif %}
-                {% if user.is_authenticated %}
-                <a href="{% url 'blog:post_update' pk=post.pk   %}">
-                    <span class="fa-stack fa-lg">
-                        <i class="fas fa-circle fa-stack-2x"></i>
-                        <i class="fa fa-edit fa-stack-1x fa-inverse" aria-hidden="true"></i>
-                    </span>
-                    Edit
-                </a>
-                <a href="{% url 'blog:post_delete' pk=post.pk %}">
-                    <span class="fa-stack fa-lg">
-                        <i class="fas fa-circle fa-stack-2x text-danger"></i>
-                        <i class="fa fa-trash fa-stack-1x fa-inverse" aria-hidden="true"></i>
-                    </span>
-                    Delete
-                </a>
-                <br>
-                {% endif %}
-
-                {{ post.text|safe}}
-
-
-            </div>
+            </p>
+            <p>Category:{{post.category}}|Tags:{% for tag in post.tags.all %}
+                {{tag}}
+                {% empty %}
+                No tags yet.
+                {% endfor %}
+            </p>
+            <p class="card-text ">{{ post.text | safe }}</p>
         </div>
     </div>
-</article>
-<hr>
-{% if post.published_at %}
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-            <!--<a class="btn btn-secondary" href="{% url 'blog:post-comment' pk=post.pk %}">Add comment</a>-->
-            <h3>Leave a comment:</h3>
-            <form action="{% url 'blog:post-comment' pk=post.pk %}" method="post">
-                {% csrf_token %}
-                {{form|crispy}}
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-            <h3>Comments:</h3>
-            {% for comment in post.comments.all %}
-            {% if user.is_authenticated or comment.approved_comment %}
-            <div class="comment">
-                <div class="date">
-                    <strong>{{ comment.author }}</strong> {{ comment.created_at }}
-                    {% if not comment.approved_comment %}
-                    <a class="btn btn-default" href="{% url 'blog:comment_remove' pk=comment.pk %}">
-                        <span class="fa-stack fa-lg">
-                            <i class="fas fa-circle fa-stack-2x text-danger"></i>
-                            <i class="fa fa-times fa-stack-1x fa-inverse " aria-hidden="true"></i>
-                         </span>
-                    </a>
-                    <a class="btn btn-default" href="{% url 'blog:comment_approve' pk=comment.pk %}">
-                         <span class="fa-stack fa-lg">
-                            <i class="fas fa-circle fa-stack-2x "></i>
-                            <i class="fa fa-check fa-stack-1x fa-inverse " aria-hidden="true"></i>
-                         </span>
-
-                    </a>
-                    {% endif %}
+    <div class="col-md-3">
+        <!-- Search Widget -->
+        <div class="card my-4">
+            <h5 class="card-header">Actions</h5>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="list-unstyled mb-0">
+                            {% if user.is_authenticated %}
+                            {% if post.published_at %}
+                            {% else %}
+                            <li>
+                                <a class="btn btn-secondary" href="{% url 'blog:post_publish' post.pk %}"> <i
+                                        class="fas fa-upload"></i> Publish</a>
+                            </li>
+                            {% endif %}
+                            <li style="margin-top:5px;margin-bottom:5px;">
+                                <a class="btn btn-primary" href="{% url 'blog:post_update' pk=post.pk   %}"> <i
+                                        class="fas fa-edit"></i> Edit</a>
+                            </li>
+                            <li style="margin-top:5px;margin-bottom:5px;">
+                                <a class="btn btn-danger" href="{% url 'blog:post_delete' pk=post.pk   %}"><i
+                                        class="fas fa-times"></i> Delete</a>
+                            </li>
+                            <li style="margin-top:5px;margin-bottom:5px;">
+                                <a class="btn btn-secondary" href="{% url 'blog:post-create' %}"><i
+                                        class="fas fa-plus"></i> Add new Post</a>
+                            </li>
+                            <li style="margin-top:5px;margin-bottom:5px;">
+                                <a class="btn btn-default" href="{% url 'blog:post_draft_list' %}"><i
+                                        class="fas  fa-list"></i> Drafts</a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </div>
                 </div>
-
-                <p>{{ comment.text|safe|linebreaks}}</p>
             </div>
-            {% else %}
-            <p>No comments approved yet or this post :(</p>
-            {% endif %}
-            {% empty %}
-            <p>No comments here yet :(</p>
-            {% endfor %}
         </div>
     </div>
+
+</div>
+{% if post.published_at %}
+<div class="row">
+    <div class="col-md-8">
+        <h3>Leave a comment:</h3>
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1 mx-auto">
+                <form action="{% url 'blog:post-comment' pk=post.pk %}" method="post">
+                    {% csrf_token %}
+                    {{form|crispy}}
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+        <hr>
+        <h3>Comments:</h3>
+        {% for comment in post.comments.all %}
+        {% if user.is_authenticated or comment.approved_comment %}
+        <div>
+            <div>
+                <strong>{{ comment.author }}</strong> {{ comment.created_at }}
+                {% if not comment.approved_comment %}
+                <a class="btn btn-danger" href="{% url 'blog:comment_remove' pk=comment.pk %}">remove</a>
+                <a class="btn btn-warning" href="{% url 'blog:comment_approve' pk=comment.pk %}"> Approve</a>
+                {% endif %}
+            </div>
+
+            <p>{{ comment.text|safe|linebreaks}}</p>
+        </div>
+        {% else %}
+        <p>No comments approved yet or this post :(</p>
+        {% endif %}
+        {% empty %}
+        <p>No comments here yet :(</p>
+        {% endfor %}
+    </div>
+</div>
 </div>
 {% endif %}
 
-<!--<div class="post">-->
-<!--{% if post.published_at %}-->
-<!--<div class="date">-->
-<!--Published at: {{ post.published_at }}-->
-<!--</div>-->
-<!--{% else %}-->
-<!--{% if user.is_authenticated %}-->
-<!--<a class="btn btn-default" href="{% url 'blog:post_publish' pk=post.pk %}">Publish</a>-->
-<!--{% endif %}-->
-<!--{% endif %}-->
-<!--{% if user.is_authenticated %}-->
-<!--<a class="btn btn-default" href="{% url 'blog:post_update' pk=post.pk %}"><span-->
-<!--class="glyphicon glyphicon-edit"></span></a>-->
-<!--<a class="btn btn-default" href="{% url 'blog:post_delete' pk=post.pk %}"><span-->
-<!--class="glyphicon glyphicon-remove"></span></a>-->
-<!--{% endif %}-->
-<!--<h2>{{ post.title }}</h2>-->
-<!--<p>{{ post.text|linebreaksbr }}</p>-->
-<!--</div>-->
-<!--<hr>-->
 
 {% endblock content%}
 {% block js %}
@@ -148,5 +134,9 @@
 
 
          });
+
+
+
+
 </script>
 {% endblock js %}

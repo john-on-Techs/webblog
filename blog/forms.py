@@ -34,3 +34,10 @@ class CommentForm(forms.Form):
 #     class Meta:
 #         model = Post
 #         fields = ['title', 'text',]
+
+
+
+class ContactForm(forms.Form):
+    name = forms.CharField(required=False, max_length=100, help_text='100 characters max.')
+    email = forms.EmailField(required=True)
+    comment_message = forms.CharField(widget=forms.Textarea)

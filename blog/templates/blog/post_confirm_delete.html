@@ -1,6 +1,6 @@
-{% extends "profiles/base.html" %}
+{% extends "blog/base.html" %}
 {% block content %}
-<div class="row">
+<div class="row" style="margin-bottom:20px;">
     <div class="col-md-6 col-md-offset-3">
         <form method="post">{% csrf_token %}
             <p>Are you sure you want to delete "{{ object }}"?</p><br />

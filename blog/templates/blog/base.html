@@ -1,37 +1,51 @@
-{% load staticfiles %}
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-    <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet"
-          type="text/css">
-    <link rel="stylesheet" href="{% static 'blog/css/blog.css' %}">
-</head>
-<body>
-<div class="page-header">
-    {% if user.is_authenticated %}
-    <a href="{% url 'blog:post-create' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
-    <a href="{% url 'blog:post_draft_list' %}" class="top-menu"><span class="glyphicon glyphicon-edit"></span></a>
-    <p class="top-menu">Hello {{ user.username }}
-        <small>(<a href="{% url 'logout' %}">Log out</a>)</small>
-    </p>
-    {% else %}
-    <a href="{% url 'login' %}" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a>
-    {% endif %}
-    <h1><a href="{% url 'blog:post_list' %}">Ongwae John Blog</a></h1>
 
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+    <title>Oenga John</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'profiles/css/bootstrap.min.css' %} " rel="stylesheet">
+    <script src="{% static 'profiles/js/font-awesome-all.js' %}"></script>
+    {% block css %}
+
+    {% endblock css %}
+    <!-- Custom styles for this template -->
+    <link href="{% static 'profiles/css/blog-home.css' %} " rel="stylesheet">
+    <link href="{% static 'profiles/css/custom.css' %} " rel="stylesheet">
+
+
+</head>
+
+<body>
+<!-- Navigation Panel -->
+{% include 'blog/includes/navigation-panel.html' %}
+
+
+<!-- Main Blog Post Content -->
+<div class="container">
+    {% block content %}
+    {% endblock content %}
 </div>
-<div class="content container">
-    <div class="row">
-        <div class="col-md-8">
-            {% block content%}
-            {% endblock content%}
-        </div>
-    </div>
-</div>
+
+<!-- Footer -->
+{% include 'blog/includes/footer-panel.html' %}
+
+<script src="{% static 'profiles/js/jquery.min.js' %}"></script>
+<script src="{% static 'profiles/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'profiles/js/tinymce.min.js' %}"></script>
+<script src="{% static 'profiles/js/prism.js' %}"></script>
+{% block js %}
+{% endblock js %}
 
 </body>
+
 </html>
