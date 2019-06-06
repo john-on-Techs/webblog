@@ -18,7 +18,8 @@
 </header>
 {% endblock header %}
 {% block content %}
- <!-- Blog Entries Column -->
+<!-- Blog Entries Column -->
+<div class="row">
     <div class="col-md-8">
 
 
@@ -59,6 +60,29 @@
         </ul>
 
     </div>
-
+    <div class="col-md-4">
+        <!-- Search Widget -->
+        <div class="card my-4">
+            <h5 class="card-header">Actions</h5>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <ul class="list-unstyled mb-0">
+                            <li style="margin-top:5px;margin-bottom:5px;">
+                                <a class="btn btn-secondary" href="{% url 'blog:post-create' %}"><i
+                                        class="fas fa-plus"></i>
+                                    Add new Post</a>
+                            </li>
+                            <li style="margin-top:5px;margin-bottom:5px;">
+                                <a class="btn btn-default" href="{% url 'blog:post_list' %}"><i
+                                        class="fas  fa-list"></i> Published Posts</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
