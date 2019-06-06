@@ -35,7 +35,10 @@
                 {% endif %}
             </p>
             <p>Category:{{post.category}}|Tags:{% for tag in post.tags.all %}
-                {{tag}}
+                <span class="label label-default" style="background:#6c757d;color:#fff;border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;"> {{tag}}</span>
                 {% empty %}
                 No tags yet.
                 {% endfor %}
@@ -45,6 +48,7 @@
     </div>
     <div class="col-md-3">
         <!-- Search Widget -->
+         {% if user.is_authenticated %}
         <div class="card my-4">
             <h5 class="card-header">Actions</h5>
             <div class="card-body">
@@ -81,6 +85,7 @@
                 </div>
             </div>
         </div>
+         {% endif %}
     </div>
 
 </div>

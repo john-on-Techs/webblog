@@ -8,8 +8,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.core.mail import send_mail
-
+from django.contrib.messages.views import SuccessMessageMixin
 from .forms import ContactForm
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 @login_required
@@ -37,7 +38,7 @@ def comment_remove(request, pk):
     return redirect('blog:post_detail', slug=comment.post.slug)
 
 
-class PostComment(generic.CreateView):
+class PostComment(SuccessMessageMixin, generic.CreateView):
     model = Comment
     fields = ['author', 'text', ]
 
@@ -54,6 +55,7 @@ class PostComment(generic.CreateView):
 class PostIndexView(generic.ListView):
     model = Post
     context_object_name = 'posts'
+    paginate_by = 3
 
     def get_queryset(self):
         """Return the last five published questions."""
@@ -71,11 +73,18 @@ class PostDraftView(LoginRequiredMixin, generic.ListView):
     model = Post
     context_object_name = 'posts'
     template_name = 'blog/post_draft_list.html'
+    paginate_by = 3
 
     def get_queryset(self):
         """Return the last five published questions."""
 
         return Post.drafts.all()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        context['tags'] = Tag.objects.all()
+        return context
 
 
 class PostDetailView(generic.DetailView):
@@ -88,9 +97,10 @@ class PostDetailView(generic.DetailView):
         return context
 
 
-class PostCreate(LoginRequiredMixin, generic.CreateView):
+class PostCreate(LoginRequiredMixin, SuccessMessageMixin, generic.CreateView):
     model = Post
     fields = ['title', 'tags', 'category', 'text']
+    success_message = "%(title)s was created successfully"
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -107,10 +117,11 @@ class TagCreate(generic.CreateView):
     fields = ['name', 'posts']
 
 
-class PostUpdate(LoginRequiredMixin, generic.UpdateView):
+class PostUpdate(LoginRequiredMixin, SuccessMessageMixin, generic.UpdateView):
     model = Post
     fields = ['title', 'tags', 'category', 'text']
     query_pk_and_slug = True
+    success_message = "%(title)s was updated successfully"
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -122,8 +133,9 @@ class PostUpdate(LoginRequiredMixin, generic.UpdateView):
         return context
 
 
-class PostDelete(LoginRequiredMixin, generic.DeleteView):
+class PostDelete(LoginRequiredMixin, SuccessMessageMixin, generic.DeleteView):
     model = Post
+    success_message = "%(title)s was deleted successfully"
     success_url = reverse_lazy('blog:post_list')
 
 

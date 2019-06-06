@@ -1,0 +1,35 @@
+{% if messages %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            {% for message in messages %}
+            <div class="alert {% if message.tags %} alert-{{ message.tags }}{% endif %}">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span arial-hidden="true">&times;</span>
+                </button>
+                {{ message|safe }}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% if form.errors %}
+<div class="alert alert-error">
+    <h4>Please fix the following errors</h4>
+    <ul>
+        {% for field in form %}
+        {% if field.errors %}
+        {% for error in field.errors %}
+        <li><a href="#id_{{ field.name }}" class="error">{{ error|escape }}</a></li>
+        {% endfor %}
+        {% endif %}
+        {% endfor %}
+    </ul>
+    {% if form.non_field_errors %}
+    {{ form.non_field_errors }}
+    {% endif %}
+</div>
+{% endif %}
