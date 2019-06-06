@@ -1,5 +1,5 @@
 from django.contrib.syndication.views import Feed
-from django.template.defaultfilters import truncatewords
+from django.template.defaultfilters import truncatewords, truncatewords_html,truncatechars_html
 from .models import Post
 
 
@@ -15,4 +15,5 @@ class PostFeed(Feed):
         return item.title
 
     def item_description(self, item):
-        return truncatewords(item.text)
+        return truncatechars_html(item.text, 200)
+        # return truncatewords(item.text)

@@ -10,4 +10,4 @@ class PostSitemap(Sitemap):
         return Post.published.all()
 
     def lastmod(self, item):
-        return item.published_at
+        return item.updated_on

@@ -32,23 +32,7 @@
 {% include 'blog/includes/navigation-panel.html' %}
 {% include 'blog/includes/errors-panel.html' %}
 
-<div class="container"  >
-    <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-6">
-            {% if messages %}
-            {% for message in messages %}
-            <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span arial-hidden="true">&times;</span>
-                </button>
-                {{message}}
-            </div>
-            {% endfor %}
-            {% endif %}
-        </div>
-    </div>
-</div>
+
 <!-- Main Blog Post Content -->
 <div class="container" style="margin-bottom:20px;">
     {% block content %}
