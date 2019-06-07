@@ -1,5 +1,7 @@
-from blog.views import PostIndexView, PostDetailView, PostDelete, PostCreate, PostUpdate, PostDraftView, post_publish, \
-    PostComment, comment_approve, comment_remove, TagCreate, contact, about, index
+from blog.views import PostCreate, PostDetailView, PostUpdate,PostDelete, PostIndexView,  PostDraftView, post_publish, \
+    PostComment, comment_approve, comment_remove,  contact, about, index,TagListView,TagCreateView,TagUpdateView,TagDetailView,\
+    TagDeleteView, CategoryListView,CategoryCreateView,CategoryDetailView,CategoryUpdateView,CategoryDeleteView
+
 from django.urls import path
 from .feeds import PostFeed
 
@@ -10,8 +12,17 @@ urlpatterns = [
     path('contact/', contact, name='contact'),
     path('about/', about, name='about'),
     path('', index, name='home'),
-    path('feed/', PostFeed(), name='post_feed'),
-    path('tag/create/', TagCreate.as_view(), name='tag-create'),
+    path('feeds/', PostFeed(), name='post_feed'),
+    path('tags/', TagListView.as_view(), name='tag-list'),
+    path('tag/create/', TagCreateView.as_view(), name='tag-create'),
+    path('tag/<int:pk>/delete/', TagDeleteView.as_view(), name='tag-delete'),
+    path('tag/<int:pk>/update/', TagUpdateView.as_view(), name='tag_update'),
+    path('tag/<str:slug>/', TagDetailView.as_view(), name='tag-detail'),
+    path('categories/', CategoryListView.as_view(), name='category-list'),
+    path('category/create/', CategoryCreateView.as_view(), name='category-create'),
+    path('category/<int:pk>/delete/', CategoryDeleteView.as_view(), name='category-delete'),
+    path('category/<int:pk>/update/', CategoryUpdateView.as_view(), name='category-update'),
+    path('category/<str:slug>/', CategoryDetailView.as_view(), name='category-detail'),
     path('post/create/', PostCreate.as_view(), name='post-create'),
     path('comment/<int:pk>/remove/', comment_remove, name='comment_remove'),
     path('comment/<int:pk>/approve/', comment_approve, name='comment_approve'),

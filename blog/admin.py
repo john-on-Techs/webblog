@@ -23,8 +23,24 @@ class PostAdmin(admin.ModelAdmin):
     }
 
 
-admin.site.register(Category)
+class TagAdmin(admin.ModelAdmin):
+    list_display = ('name', 'slug')
+    list_filter = ('name',)
+    search_fields = ('name',)
+    prepopulated_fields = {'slug': ('name',)}
+    ordering = ['name']
 
-admin.site.register(Tag)
+
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('name', 'slug')
+    list_filter = ('name',)
+    search_fields = ('name',)
+    prepopulated_fields = {'slug': ('name',)}
+    ordering = ['name']
+
+
+admin.site.register(Category, CategoryAdmin)
+
+admin.site.register(Tag,TagAdmin)
 admin.site.register(Post, PostAdmin)
 admin.site.register(Comment)

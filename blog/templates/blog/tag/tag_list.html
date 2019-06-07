@@ -1,0 +1,33 @@
+{% extends 'blog/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <h1>Tags</h1>
+        <table class="table">
+            <thead>
+            <th>#</th>
+            <th>Name</th>
+            </thead>
+            <tbody>
+            {% for tag in tags %}
+            <tr>
+                <td>{{ tag.id }}</td>
+                <td><a href="{{tag.get_absolute_url}}" class="">{{ tag.name }}</a></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% include 'blog/includes/pagination.html' %}
+    </div>
+    <div class="col-md-4">
+        <div class="well">
+            <h3>New Tag</h3>
+            <form method="post" class="post-form" action="">{% csrf_token %}
+                {{ form|crispy }}
+                <button type="submit" class="btn btn-success btn-md" style="margin-top:10px;">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

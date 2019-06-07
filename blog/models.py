@@ -20,16 +20,25 @@ class DraftsManager(models.Manager):
 
 class Tag(models.Model):
     name = models.CharField(max_length=120, unique=True)
-
-    def __str__(self):
-        return self.name
+    slug = models.SlugField(max_length=150, unique=True, db_index=True)
 
     class Meta:
         ordering = ('name',)
 
+    def __str__(self):
+        return self.name
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name, )
+        super(Tag, self).save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('blog:tag-detail', kwargs={'slug': self.slug})
+
 
 class Category(models.Model):
-    name = models.CharField(max_length=50, unique=True)
+    name = models.CharField(max_length=50, unique=True, )
+    slug = models.SlugField(max_length=150, unique=True, db_index=True)
 
     def __str__(self):
         return self.name
@@ -38,6 +47,12 @@ class Category(models.Model):
         verbose_name = 'category'
         verbose_name_plural = 'categories'
         ordering = ('name',)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name, allow_unicode=True)
+        super(Category, self).save(*args, **kwargs)
+    def get_absolute_url(self):
+        return reverse('blog:category-detail', kwargs={'slug': self.slug})
 
 
 class Post(models.Model):
@@ -50,11 +65,11 @@ class Post(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=150, unique=True, db_index=True)
-    tags = models.ManyToManyField(Tag, related_name='posts', blank=True)
+    tags = models.ManyToManyField(Tag,blank=True)
     text = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
-    published_at = models.DateTimeField( null=True, blank=True)
+    published_at = models.DateTimeField(null=True, blank=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
     # The default Manager
     objects = models.Manager()

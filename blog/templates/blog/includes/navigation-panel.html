@@ -4,7 +4,7 @@
 {% url 'blog:contact'  as contact %}
 {% url 'blog:home'  as home %}
 {% url 'login'  as login %}
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top " >
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top ">
     <div class="container">
         <a class="navbar-brand" href="#">Oenga John</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
@@ -29,18 +29,31 @@
                     <a class="nav-link" href="{% url 'blog:contact' %}">Contact</a>
                 </li>
                 {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'logout' %}">
-                        Logout
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Welcome {{ user.get_username }}
                     </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{% url 'blog:post_list' %}">Posts</a>
+                        <a class="dropdown-item" href="{% url 'blog:category-list' %}">Categories</a>
+                        <a class="dropdown-item" href="{% url 'blog:tag-list' %}">Tags</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'logout' %}" onclick="event.preventDefault();
+                         document.getElementById('frm-logout').submit();">Logout</a>
+                        <form id="frm-logout" action="{% url 'logout' %}" method="POST" style="display: none;">
+                            {% csrf_token %}
+                        </form>
+                    </div>
                 </li>
                 {% else %}
-                <li class="nav-item  {% if request.path == login %}active{% endif %}">
-                    <a class="nav-link" href="{% url 'login' %}">
-                        Login</a>
+                <li class="nav-item {% if request.path == login %}active{% endif %}">
+                    <a class="nav-link" href="{% url 'login' %}">Login</a>
                 </li>
+
                 {% endif %}
             </ul>
         </div>
     </div>
 </nav>
+

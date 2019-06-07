@@ -1,6 +1,6 @@
 from django import forms
 from tinymce import TinyMCE
-from .models import Post
+from .models import Post, Tag, Category
 
 
 class CommentForm(forms.Form):
@@ -17,6 +17,7 @@ class CommentForm(forms.Form):
             "placeholder": "Leave a comment!"
         })
     )
+
 
 #
 # class TinyMCEWidget(TinyMCE):
@@ -36,8 +37,19 @@ class CommentForm(forms.Form):
 #         fields = ['title', 'text',]
 
 
-
 class ContactForm(forms.Form):
     name = forms.CharField(required=False, max_length=100, help_text='100 characters max.')
     email = forms.EmailField(required=True)
     comment_message = forms.CharField(widget=forms.Textarea)
+
+
+class TagForm(forms.ModelForm):
+    class Meta:
+        model = Tag
+        fields = ['name']
+
+
+class CategoryForm(forms.ModelForm):
+    class Meta:
+        model = Category
+        fields = ['name']

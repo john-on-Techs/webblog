@@ -1,0 +1,61 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <h1>{{ tag.name }} Tag
+            <small>{{ tag.post_set.all.count }}</small>
+        </h1>
+    </div>
+    {% if user.is_authenticated %}
+    <div class="col-md-2 ">
+        <a href="{% url 'blog:tag_update' tag.id %}" class="btn btn-primary pull-right btn-block"
+           style="margin-top: 20px;">Edit</a>
+    </div>
+    <div class="col-md-2">
+        <a href="{% url 'blog:tag-detail' tag.id %}" class="btn btn-danger pull-right btn-block"
+           style="margin-top: 20px;">Edit</a>
+
+    </div>
+    {% endif %}
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Tags</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for post in tag.post_set.all %}
+
+            <tr>
+                <th>{{ post.id }}</th>
+                <td>{{ post.title }}</td>
+                <td>
+                    {% for tag in post.tags.all %}
+                    <span class="label label-default" style="background:#6c757d;color:#fff;border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;">{{ tag.name }}</span>
+                    {% endfor %}
+                </td>
+                <td>
+                    <a href="{% url 'blog:post_detail' post.slug %}" class="btn btn-primary btn-sm">View</a>
+                </td>
+
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+{% endblock content %}
+
+

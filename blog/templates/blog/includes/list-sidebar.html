@@ -57,7 +57,7 @@
                         {% if categories %}
                         {% for category in categories %}
                         <li>
-                            <a href="#">{{category}}</a>
+                            <a href="{{category.get_absolute_url}}">{{category}}</a>
                         </li>
                         {% empty %}
                         <p>No categories yet</p>
@@ -78,7 +78,7 @@
                         {% if tags %}
                         {% for tag in tags %}
                         <li>
-                            <a href="#">{{tag}}</a>
+                            <a href="{{tag.get_absolute_url}}">{{tag}}</a>
                         </li>
                         {% empty %}
                         <p>No tags yet</p>

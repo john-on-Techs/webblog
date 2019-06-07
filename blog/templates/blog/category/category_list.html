@@ -1,0 +1,33 @@
+{% extends 'blog/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <h1>Categories</h1>
+        <table class="table">
+            <thead>
+            <th>#</th>
+            <th>Name</th>
+            </thead>
+            <tbody>
+            {% for category in categories %}
+            <tr>
+                <td>{{ category.id }}</td>
+                <td><a href="{{category.get_absolute_url}}" class="">{{ category.name }}</a></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% include 'blog/includes/pagination.html' %}
+    </div>
+    <div class="col-md-4">
+        <div class="well">
+            <h3>New Category</h3>
+            <form method="post" class="post-form" action="">{% csrf_token %}
+                {{ form|crispy }}
+                <button type="submit" class="btn btn-success btn-md" style="margin-top:10px;">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}
