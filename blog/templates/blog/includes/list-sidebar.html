@@ -1,5 +1,5 @@
 <!-- Sidebar Widgets Column -->
-<div class="col-md-4">
+<div class="col-md-4 float-right">
     <!-- Action Widget -->
     {% if user.is_authenticated %}
     <div class="card my-4">
@@ -46,7 +46,7 @@
     <!--</div>-->
     <!--</div>-->
     <!--</div>-->
-
+    {% if categories %}
     <!-- Categories Widget -->
     <div class="card my-4">
         <h5 class="card-header">Categories</h5>
@@ -69,6 +69,8 @@
             </div>
         </div>
     </div>
+    {% endif %}
+    {% if tags %}
     <div class="card my-4">
         <h5 class="card-header">Tags</h5>
         <div class="card-body">
@@ -90,14 +92,19 @@
             </div>
         </div>
     </div>
+      {% endif %}
 
     <!-- Side Widget -->
-    <div class="card my-4">
-        <h5 class="card-header">Side Widget</h5>
-        <div class="card-body">
-            You can put anything you want inside of these side widgets. They are easy to use, and feature the
-            new Bootstrap 4 card containers!
-        </div>
+   <!-- Sidebar Widgets Column -->
+
+<div class="card my-4">
+        <h5 class="card-header">About Us</h5>
+    <div class="card-body">
+        <p class="card-text"> This awesome blog is made on the top of our Favourite full stack Framework 'Django', follow up the tutorial to learn how we made it..!</p>
+        <a href="https://djangocentral.com/building-a-blog-application-with-django"
+           class="btn btn-danger">Know more!</a>
     </div>
+</div>
+
 
 </div>

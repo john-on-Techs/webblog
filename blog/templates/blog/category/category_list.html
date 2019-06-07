@@ -1,6 +1,7 @@
 {% extends 'blog/base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
+
 <div class="row">
     <div class="col-md-8">
         <h1>Categories</h1>
@@ -20,6 +21,7 @@
         </table>
         {% include 'blog/includes/pagination.html' %}
     </div>
+     {% if user.is_authenticated %}
     <div class="col-md-4">
         <div class="well">
             <h3>New Category</h3>
@@ -29,5 +31,6 @@
             </form>
         </div>
     </div>
+    {% endif %}
 </div>
 {% endblock content %}
