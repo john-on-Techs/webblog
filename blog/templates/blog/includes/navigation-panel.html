@@ -1,5 +1,10 @@
 <!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+{% url 'blog:post_list' as post_list %}
+{% url 'blog:about'  as about %}
+{% url 'blog:contact'  as contact %}
+{% url 'blog:home'  as home %}
+{% url 'login'  as login %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top " >
     <div class="container">
         <a class="navbar-brand" href="#">Oenga John</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
@@ -7,20 +12,20 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'blog:home' %}">Home
-                        <span class="sr-only">(current)</span>
+            <ul class="navbar-nav ml-auto  nav-fill w-100 ">
+                <li class="nav-item {% if request.path == home %}active{% endif %}">
+                    <a class="nav-link " href="{% url 'blog:home' %}">Home
+
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {% if request.path == post_list %}active{% endif %}">
                     <a class="nav-link" href="{% url 'blog:post_list' %}">Blog</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {% if request.path == about %}active{% endif %}">
                     <a class="nav-link" href="{% url 'blog:about' %}">About</a>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item {% if request.path == contact %}active{% endif %}">
                     <a class="nav-link" href="{% url 'blog:contact' %}">Contact</a>
                 </li>
                 {% if user.is_authenticated %}
@@ -30,7 +35,7 @@
                     </a>
                 </li>
                 {% else %}
-                <li class="nav-item">
+                <li class="nav-item  {% if request.path == login %}active{% endif %}">
                     <a class="nav-link" href="{% url 'login' %}">
                         Login</a>
                 </li>
