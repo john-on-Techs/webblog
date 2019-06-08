@@ -16,6 +16,9 @@
             <input class="btn btn-primary" type="submit" value="login"/>
             <input type="hidden" name="next" value="{{ next }}"/>
         </form>
+        <p><strong>-- OR --</strong></p>
+        <a href="{% url 'social:begin' 'github' %}">Login with GitHub</a><br>
+
     </div>
 </div>
 {% endblock %}

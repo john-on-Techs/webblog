@@ -31,8 +31,8 @@ urlpatterns = [
 
     path('accounts/login/', login, name='login'),
     path('accounts/logout/', logout, {'next_page': '/'}, name='logout'),
+    path('auth/', include('social_django.urls', namespace='social')),  # <- Here
     path('tinymce/', include('tinymce.urls')),
-
     path('select2/', include('django_select2.urls')),
     path('admin/filebrowser/', site.urls),
     path('grappelli/', include('grappelli.urls')),
