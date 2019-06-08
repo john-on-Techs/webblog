@@ -1,5 +1,5 @@
 <!-- Navigation -->
-{% url 'blog:post_list' as post_list %}
+{% url 'blog:post-list' as post_list %}
 {% url 'blog:about'  as about %}
 {% url 'blog:contact'  as contact %}
 {% url 'blog:home'  as home %}
@@ -19,7 +19,7 @@
                     </a>
                 </li>
                 <li class="nav-item {% if request.path == post_list %}active{% endif %}">
-                    <a class="nav-link" href="{% url 'blog:post_list' %}">Blog</a>
+                    <a class="nav-link" href="{% url 'blog:post-list' %}">Blog</a>
                 </li>
                 <li class="nav-item {% if request.path == about %}active{% endif %}">
                     <a class="nav-link" href="{% url 'blog:about' %}">About</a>
@@ -35,7 +35,7 @@
                         Welcome {{ user.get_username }}
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{% url 'blog:post_list' %}">Posts</a>
+                        <a class="dropdown-item" href="{% url 'blog:post-list' %}">Posts</a>
                         <a class="dropdown-item" href="{% url 'blog:category-list' %}">Categories</a>
                         <a class="dropdown-item" href="{% url 'blog:tag-list' %}">Tags</a>
                         <div class="dropdown-divider"></div>

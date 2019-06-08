@@ -7,7 +7,7 @@
             <small>{{ category.post_set.all.count }}</small>
         </h1>
     </div>
-     {% if user.is_authenticated %}
+    {% if user.is_authenticated %}
     <div class="col-md-2 ">
         <a href="{% url 'blog:category-update' category.id %}" class="btn btn-primary pull-right btn-block"
            style="margin-top: 20px;">Edit</a>
@@ -44,7 +44,7 @@
                     {% endfor %}
                 </td>
                 <td>
-                    <a href="{% url 'blog:post_detail' post.slug %}" class="btn btn-primary btn-sm">View</a>
+                    <a href="{% url 'blog:post-detail' post.slug %}" class="btn btn-primary btn-sm">View</a>
                 </td>
 
             </tr>

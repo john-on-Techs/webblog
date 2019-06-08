@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post, Comment, Category, Tag
+from .models import Post, Comment, Category, Tag, Profile
 from tinymce.widgets import TinyMCE
 from django.db import models
 from easy_select2 import select2_modelform
@@ -41,6 +41,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 admin.site.register(Category, CategoryAdmin)
 
-admin.site.register(Tag,TagAdmin)
+admin.site.register(Tag, TagAdmin)
 admin.site.register(Post, PostAdmin)
 admin.site.register(Comment)
+admin.site.register(Profile)

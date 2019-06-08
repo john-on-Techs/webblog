@@ -3,7 +3,7 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<div class="row container">
+<div class="row ">
     {% if not user.is_authenticated %}
     <div class="col-md-2"></div>
     {% endif %}
@@ -27,7 +27,8 @@
                 {% empty %}
                 No tags yet.
                 {% endfor %}
-            </div><hr>
+            </div>
+            <hr>
 
 
             <p class="card-text ">{{ post.text | safe }}</p>
@@ -46,16 +47,16 @@
                             {% if post.published_at %}
                             {% else %}
                             <li>
-                                <a class="btn btn-secondary" href="{% url 'blog:post_publish' post.pk %}"> <i
+                                <a class="btn btn-secondary" href="{% url 'blog:post-publish' post.pk %}"> <i
                                         class="fas fa-upload"></i> Publish</a>
                             </li>
                             {% endif %}
                             <li style="margin-top:5px;margin-bottom:5px;">
-                                <a class="btn btn-primary" href="{% url 'blog:post_update' pk=post.pk   %}"> <i
+                                <a class="btn btn-primary" href="{% url 'blog:post-update' pk=post.pk   %}"> <i
                                         class="fas fa-edit"></i> Edit</a>
                             </li>
                             <li style="margin-top:5px;margin-bottom:5px;">
-                                <a class="btn btn-danger" href="{% url 'blog:post_delete' pk=post.pk   %}"><i
+                                <a class="btn btn-danger" href="{% url 'blog:post-delete' pk=post.pk   %}"><i
                                         class="fas fa-times"></i> Delete</a>
                             </li>
                             <li style="margin-top:5px;margin-bottom:5px;">
@@ -63,7 +64,7 @@
                                         class="fas fa-plus"></i> Add new Post</a>
                             </li>
                             <li style="margin-top:5px;margin-bottom:5px;">
-                                <a class="btn btn-default" href="{% url 'blog:post_draft_list' %}"><i
+                                <a class="btn btn-default" href="{% url 'blog:post-draft-list' %}"><i
                                         class="fas  fa-list"></i> Drafts</a>
                             </li>
 
@@ -88,7 +89,7 @@
                 <form action="{% url 'blog:post-comment' pk=post.pk %}" method="post">
                     {% csrf_token %}
                     {{form|crispy}}
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <input class="btn btn-primary" type="submit" value="Save">
                 </form>
             </div>
         </div>
@@ -100,8 +101,8 @@
             <div>
                 <strong>{{ comment.author }}</strong> {{ comment.created_at }}
                 {% if not comment.approved_comment %}
-                <a class="btn btn-danger" href="{% url 'blog:comment_remove' pk=comment.pk %}">remove</a>
-                <a class="btn btn-warning" href="{% url 'blog:comment_approve' pk=comment.pk %}"> Approve</a>
+                <a class="btn btn-danger" href="{% url 'blog:comment-remove' pk=comment.pk %}">remove</a>
+                <a class="btn btn-warning" href="{% url 'blog:comment-approve' pk=comment.pk %}"> Approve</a>
                 {% endif %}
             </div>
 
@@ -122,14 +123,19 @@
 {% endblock content%}
 {% block js %}
 <script>
-        tinymce.init({ selector:'textarea',
+        tinymce.init({
+            selector:'textarea',
             height:200,
         	plugins:'link code codesample image imagetools wordcount lists  preview table autolink visualblocks visualchars textcolor save link image media',
         	toolbar1:' preview bold italic underline | fontselect,fontsizeselect  | forecolor backcolor | alignleft alignright |aligncenter alignjustify | indent outdent | bullist numlist table | link image media | codesample |',
-            menubar:false
-
-
+            menubar:false,
+            setup: function (editor) {
+            editor.on('change', function (e) {
+                editor.save();
+            });
+        }
          });
+
 
 
 

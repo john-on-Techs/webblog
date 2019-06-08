@@ -115,21 +115,21 @@ class TagDeleteView(LoginRequiredMixin, SuccessMessageMixin, generic.DeleteView)
 def post_publish(request, pk):
     post = get_object_or_404(Post, pk=pk)
     post.publish()
-    return redirect('blog:post_detail', slug=post.slug)
+    return redirect('blog:post-detail', slug=post.slug)
 
 
 @login_required
 def comment_approve(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
     comment.approve()
-    return redirect('blog:post_detail', slug=comment.post.slug)
+    return redirect('blog:post-detail', slug=comment.post.slug)
 
 
 @login_required
 def comment_remove(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
     comment.delete()
-    return redirect('blog:post_detail', slug=comment.post.slug)
+    return redirect('blog:post-detail', slug=comment.post.slug)
 
 
 class PostComment(SuccessMessageMixin, generic.CreateView):
@@ -142,7 +142,7 @@ class PostComment(SuccessMessageMixin, generic.CreateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy('blog:post_detail', kwargs={'slug': self.object.post.slug})
+        return reverse_lazy('blog:post-detail', kwargs={'slug': self.object.post.slug})
 
 
 # ----Class Based Views-------
@@ -229,7 +229,7 @@ class PostUpdate(LoginRequiredMixin, SuccessMessageMixin, generic.UpdateView):
 class PostDelete(LoginRequiredMixin, SuccessMessageMixin, generic.DeleteView):
     model = Post
     success_message = "%(title)s was deleted successfully"
-    success_url = reverse_lazy('blog:post_list')
+    success_url = reverse_lazy('blog:post-list')
     template_name = 'blog/post/post_confirm_delete.html'
 
 

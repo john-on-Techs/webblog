@@ -15,14 +15,14 @@
                         </li>
                         {% ifequal request.path '/published/' %}
                         <li style="margin-top:5px;margin-bottom:5px;">
-                            <a class="btn btn-default" href="{% url 'blog:post_draft_list' %}"><i
+                            <a class="btn btn-default" href="{% url 'blog:post-draft-list' %}"><i
                                     class="fas  fa-list"></i> Draft Posts</a>
 
                         </li>
                         {% endifequal %}
                         {% ifequal request.path '/drafts/' %}
                         <li style="margin-top:5px;margin-bottom:5px;">
-                            <a class="btn btn-default" href="{% url 'blog:post_list' %}"><i
+                            <a class="btn btn-default" href="{% url 'blog:post-list' %}"><i
                                     class="fas  fa-list"></i>Published Posts</a>
 
                         </li>
@@ -92,19 +92,20 @@
             </div>
         </div>
     </div>
-      {% endif %}
+    {% endif %}
 
     <!-- Side Widget -->
-   <!-- Sidebar Widgets Column -->
+    <!-- Sidebar Widgets Column -->
 
-<div class="card my-4">
+    <div class="card my-4">
         <h5 class="card-header">About Us</h5>
-    <div class="card-body">
-        <p class="card-text"> This awesome blog is made on the top of our Favourite full stack Framework 'Django', follow up the tutorial to learn how we made it..!</p>
-        <a href="#"
-           class="btn btn-danger">Know more!</a>
+        <div class="card-body">
+            <p class="card-text"> This awesome blog is made on the top of our Favourite full stack Framework 'Django',
+                follow up the tutorial to learn how we made it..!</p>
+            <a href="#"
+               class="btn btn-danger">Know more!</a>
+        </div>
     </div>
-</div>
 
 
 </div>

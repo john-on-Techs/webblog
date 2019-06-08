@@ -51,6 +51,7 @@ class Category(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name, allow_unicode=True)
         super(Category, self).save(*args, **kwargs)
+
     def get_absolute_url(self):
         return reverse('blog:category-detail', kwargs={'slug': self.slug})
 
@@ -65,7 +66,7 @@ class Post(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=150, unique=True, db_index=True)
-    tags = models.ManyToManyField(Tag,blank=True)
+    tags = models.ManyToManyField(Tag, blank=True)
     text = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
@@ -97,7 +98,7 @@ class Post(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('blog:post_detail', kwargs={'slug': self.slug})
+        return reverse('blog:post-detail', kwargs={'slug': self.slug})
 
     def approved_comments(self):
         return self.comments.filter(approved_comment=True)
@@ -122,3 +123,8 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.text
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    image = models.FileField(upload_to='uploads/user-images/')
