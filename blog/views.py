@@ -11,8 +11,6 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.contrib.messages.views import SuccessMessageMixin
 from .forms import CommentForm,ContactForm, TagForm, CategoryForm,PostForm
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
 
 
 
