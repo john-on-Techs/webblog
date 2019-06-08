@@ -2,7 +2,6 @@ from blog.views import PostCreate, PostDetailView, PostUpdate, PostDelete, PostI
     PostComment, comment_approve, comment_remove, contact, about, index, TagListView, TagCreateView, TagUpdateView, \
     TagDetailView, \
     TagDeleteView, CategoryListView, CategoryCreateView, CategoryDetailView, CategoryUpdateView, CategoryDeleteView
-
 from django.urls import path
 from .feeds import PostFeed
 

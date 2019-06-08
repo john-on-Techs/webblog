@@ -106,7 +106,7 @@
                 {% endif %}
             </div>
 
-            <p>{{ comment.text|safe|linebreaks}}</p>
+            <p>{{ comment.text|safe}}</p>
         </div>
         {% else %}
         <p>No comments approved yet or this post :(</p>
@@ -122,6 +122,7 @@
 
 {% endblock content%}
 {% block js %}
+<script src="{% static 'blog/js/tinymce.min.js' %}"></script>
 <script>
         tinymce.init({
             selector:'textarea',
@@ -135,13 +136,6 @@
             });
         }
          });
-
-
-
-
-
-
-
 
 </script>
 {% endblock js %}

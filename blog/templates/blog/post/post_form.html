@@ -1,13 +1,10 @@
 {% extends "blog/base.html" %}
-
 {% load crispy_forms_tags %}
 {% load static %}
 {% block css %}
-{{ form.media.css }}
 <link href="{% static 'blog/css/select2.min.css' %} " rel="stylesheet">
 {% endblock css %}f
 {% block content %}
-
 <div class="row ">
     <div class="col-md-2"></div>
     <div class="col-md-9">
@@ -26,32 +23,10 @@
 </div>
 {% endblock content %}
 {% block js %}
-{{ form.media.js }}
 <script src="{% static 'blog/js/select2.min.js' %}"></script>
 <script type="text/javascript">
     $('.selectmultiple').select2();
 
-</script>
-<script type="text/javascript">
-
-    tinymce.init({
-        height: 360,
-        width: 600,
-        theme: 'modern',
-
-        custom_undo_redo_levels: 20,
-        selector: 'textarea',
-        plugins:'code image imagetools textcolor save link image media preview codesample contextmenu table code lists fullscreen  insertdatetime  nonbreaking directionality searchreplace wordcount visualblocks visualchars code fullscreen autolink lists  charmap print hr anchor pagebreak',
-        toolbar1: 'fullscreen preview bold italic underline | fontselect,fontsizeselect  | forecolor backcolor | alignleft alignright |aligncenter alignjustify | indent outdent | bullist numlist table | link image media | codesample |',
-        toolbar2:'visualblocks visualchars |charmap hr pagebreak nonbreaking anchor |  code |',
-        contextmenu: 'formats | link image',
-
-        setup: function (editor) {
-            editor.on('change', function (e) {
-                editor.save();
-            });
-        }
-    });
 
 
 </script>

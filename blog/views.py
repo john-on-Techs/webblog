@@ -3,15 +3,17 @@ from django.urls import reverse_lazy
 from django.utils import timezone
 from django.views import generic
 from django.contrib.messages.views import messages
-from .forms import CommentForm
+
 from .models import Post, Comment, Tag, Category
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.core.mail import send_mail
 from django.contrib.messages.views import SuccessMessageMixin
-from .forms import ContactForm, TagForm, CategoryForm
+from .forms import CommentForm,ContactForm, TagForm, CategoryForm,PostForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
+
 
 
 # CRUD OPERATIONS FOR CATEGORY MODEL
@@ -195,7 +197,7 @@ class PostDetailView(generic.DetailView):
 
 class PostCreate(LoginRequiredMixin, SuccessMessageMixin, generic.CreateView):
     model = Post
-    fields = ['title', 'tags', 'category', 'text']
+    form_class = PostForm
     success_message = "%(title)s was created successfully"
     template_name = 'blog/post/post_form.html'
 
@@ -211,7 +213,8 @@ class PostCreate(LoginRequiredMixin, SuccessMessageMixin, generic.CreateView):
 
 class PostUpdate(LoginRequiredMixin, SuccessMessageMixin, generic.UpdateView):
     model = Post
-    fields = ['title', 'tags', 'category', 'text']
+    form_class = PostForm
+
     query_pk_and_slug = True
     success_message = "%(title)s was updated successfully"
     template_name = 'blog/post/post_form.html'

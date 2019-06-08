@@ -41,14 +41,13 @@ INSTALLED_APPS = [
     # Provider apps
     'crispy_forms',
     'tinymce',
-'grappelli',
+    'grappelli',
     'filebrowser',
     'django_select2',
     'easy_select2',
 
     # Custom apps
     'blog',
-
 
 ]
 
@@ -127,7 +126,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
@@ -152,9 +150,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 LOGIN_REDIRECT_URL = '/'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 TINYMCE_DEFAULT_CONFIG = {
-
-    'height': 200,
-    'width': 900,
+    'height': 360,
+    'width': 700,
     'cleanup_on_startup': True,
     'custom_undo_redo_levels': 20,
     'selector': 'textarea',

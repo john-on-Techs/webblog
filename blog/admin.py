@@ -5,8 +5,6 @@ from django.db import models
 from easy_select2 import select2_modelform
 
 PostForm = select2_modelform(Post, attrs={'width': '350px'})
-
-
 # Register your models here.
 class PostAdmin(admin.ModelAdmin):
     form = PostForm
@@ -18,9 +16,7 @@ class PostAdmin(admin.ModelAdmin):
     date_hierarchy = 'published_at'
     ordering = ['published_at', 'status']
 
-    formfield_overrides = {
-        models.TextField: {'widget': TinyMCE()},
-    }
+
 
 
 class TagAdmin(admin.ModelAdmin):
@@ -45,3 +41,4 @@ admin.site.register(Tag, TagAdmin)
 admin.site.register(Post, PostAdmin)
 admin.site.register(Comment)
 admin.site.register(Profile)
+
