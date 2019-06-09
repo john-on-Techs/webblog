@@ -52,6 +52,9 @@ INSTALLED_APPS = [
 
 ]
 AUTHENTICATION_BACKENDS = (
+    'social_core.backends.open_id.OpenIdAuth',  # for Google authentication
+    'social_core.backends.google.GoogleOpenId',  # for Google authentication
+    'social_core.backends.google.GoogleOAuth2',
     'social_core.backends.github.GithubOAuth2',
     'social_core.backends.twitter.TwitterOAuth',
     'social_core.backends.facebook.FacebookOAuth2',
@@ -165,7 +168,7 @@ SOCIAL_AUTH_URL_NAMESPACE = 'social'
 # google
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '865337796217-kh02k59q4e6j9vk1m5cv3gnh4abeg8dq.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'RkPs1mhl_NLrezjxtfTuOhGI'
-#github
+# github
 SOCIAL_AUTH_GITHUB_KEY = 'c25bdb58eaa4207aa867'
 SOCIAL_AUTH_GITHUB_SECRET = 'e805922366401b881fbd974b3daee13ee20cacd4'
 # Facebook
