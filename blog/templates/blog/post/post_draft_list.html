@@ -1,22 +1,5 @@
 {% extends "blog/base.html" %}
 {% load static %}
-{% block header %}
-
-<!-- Page Header -->
-<header class="masthead" style="background-image: url({% static 'blog/images/post-bg.jpg' %})">
-    <div class="overlay"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-md-10 mx-auto">
-                <div class="site-heading">
-                    <h1> Draft Posts</h1>
-                    <span class="subheading">Not Yet Published   </span>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
-{% endblock header %}
 {% block content %}
 <!-- Blog Entries Column -->
 <div class="row">
@@ -32,9 +15,7 @@
             <!--<img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">-->
             <div class="card-body">
                 <h2 class="card-title"> {{ post.title }} </h2>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid
-                    atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero
-                    voluptate voluptatibus possimus, veniam magni quis!</p>
+                <p class="card-text"></p>
                 <a href="{{ post.get_absolute_url }}" class="btn btn-primary">View Details &rarr;</a>
 
             </div>
