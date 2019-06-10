@@ -96,8 +96,8 @@ WSGI_APPLICATION = 'website.wsgi.application'
 
 # emailing
 EMAIL_HOST = 'smtp.mailtrap.io'
-EMAIL_HOST_USER = 'f54dab89eb8816'
-EMAIL_HOST_PASSWORD = '680396fe40b099'
+EMAIL_HOST_USER = 'b8a70320e20c1f'
+EMAIL_HOST_PASSWORD = 'f0a9aefa334b29'
 EMAIL_PORT = 25
 EMAIL_USE_TLS = True
 
