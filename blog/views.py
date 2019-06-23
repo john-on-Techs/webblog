@@ -249,8 +249,8 @@ def contact(request):
         print(request.POST)
         subject = 'Message from MyBlog'
         name = form.cleaned_data['name']
-        comment = form.cleaned_data['comment_message']
-        message = '{name} {comment_message}'.format(name=name, comment_message=comment)
+        message = form.cleaned_data['message']
+        message = '{name} {message}'.format(name=name, message=message)
         emailFrom = form.cleaned_data['email']
         emailTo = [settings.EMAIL_HOST_USER]
         send_mail(subject, message, emailFrom, emailTo)
