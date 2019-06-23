@@ -9,6 +9,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.core.mail import send_mail
+
 from django.contrib.messages.views import SuccessMessageMixin
 from .forms import CommentForm,ContactForm, TagForm, CategoryForm,PostForm
 
@@ -253,7 +254,7 @@ def contact(request):
         message = '{name} {message}'.format(name=name, message=message)
         emailFrom = form.cleaned_data['email']
         emailTo = [settings.EMAIL_HOST_USER]
-        send_mail(subject, message, emailFrom, emailTo)
+        send_mail(subject, message, emailFrom, emailTo,fail_silently=False)
         title = 'Well {name}!.'.format(name=name)
         confirm_message = 'Thank You for the Message.We will get right back to you.'
         form = None
