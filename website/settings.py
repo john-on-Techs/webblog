@@ -96,8 +96,8 @@ WSGI_APPLICATION = 'website.wsgi.application'
 
 # emailing
 EMAIL_HOST = 'smtp.mailtrap.io'
-EMAIL_HOST_USER = '0e70f7cf015982'
-EMAIL_HOST_PASSWORD = '931121d8940424'
+EMAIL_HOST_USER = 'update me'
+EMAIL_HOST_PASSWORD = 'update me'
 EMAIL_PORT = '2525'
 
 # Database
@@ -113,9 +113,9 @@ DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
 #         'NAME': 'webblog',
-#         'USER': 'root',
-#         'PASSWORD': 'Franjescal 1997',
-#         'HOST': 'localhost',  # Or an IP Address that your DB is hosted on
+#         'USER': 'user',
+#         'PASSWORD': '',
+#         'HOST': '',  # Or an IP Address that your DB is hosted on
 #         'PORT': '3306',
 #    }
 # }
@@ -168,8 +168,8 @@ SOCIAL_AUTH_URL_NAMESPACE = 'social'
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = 'update me'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'update me'
 # github
-SOCIAL_AUTH_GITHUB_KEY = 'c25bdb58eaa4207aa867'
-SOCIAL_AUTH_GITHUB_SECRET = 'e805922366401b881fbd974b3daee13ee20cacd4'
+SOCIAL_AUTH_GITHUB_KEY = 'update me'
+SOCIAL_AUTH_GITHUB_SECRET = 'update me'
 # Facebook
 SOCIAL_AUTH_FACEBOOK_KEY = 'update me'
 SOCIAL_AUTH_FACEBOOK_SECRET = 'update me'
