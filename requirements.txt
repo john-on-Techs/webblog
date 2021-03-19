@@ -14,7 +14,7 @@ django-select2==7.0.3
 django-taggit==0.17.1
 django-tinymce==2.8.0
 django-tinymce4-lite==1.7.5
-djangorestframework==3.9.4
+djangorestframework==3.11.2
 idna==2.8
 jsmin==2.2.2
 mysqlclient==1.4.2.post1
